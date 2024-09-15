@@ -1,0 +1,459 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define suggestionsFile "suggestions.txt"
+int SerialNum;
+int newEntry;
+char RollNo[10] = "2201MM08";
+
+char smile = 2;
+void shift(char a[5][40], char **b)
+{
+    for (int i = 0; i < 5; i++)
+    {
+        b[i] = a[i];
+    }
+}
+typedef struct CharL
+{
+    char arr1[5][40];
+} CharL;
+char des[5][40] = {"DAYS     ", "Breakfast(7-9am)   ", "Lunch(12-2pm)           ", "Snacks(5:30-6:30pm)", "Dinner(8-10pm)                       "};
+char mon[5][40] = {"Monday   ", "Sandwich           ", "Kadhi Pakoda & Chana    ", "Samosa             ", "Aloo Dam,Poori & custard             "};
+char tue[5][40] = {"Tuesday  ", "Masala Dosa        ", "Soyabean curry          ", "Bread pakoda       ", "Veg kofta & Gulab jamun              "};
+char wed[5][40] = {"Wednesday", "Pasta              ", "Rajma & French fries    ", "Pyaaz kachori      ", "Matar Paneer/chicken & Jalebi        "};
+char thu[5][40] = {"Thursday ", "Idli,Vada & Sambhar", "Palak Paneer            ", "Litti chokha       ", "Manchurian & Noodles                 "};
+char fri[5][40] = {"Friday   ", "Pav bhaji          ", "Egg curry/Mushroom curry", "French fries       ", "Butter Paneer/chicken                "};
+char sat[5][40] = {"Saturday ", "Aloo Paratha       ", "Chhole Bhature          ", "Palak pakoda       ", "Lauki Kofta & Daal Makhani           "};
+char sun[5][40] = {"Sunday   ", "Lemon rice         ", "Aloo palak              ", "Aloo chaat         ", "Chicken Biryani/Paneer Lachha Paratha"};
+struct CharL *menu1;
+void menu()
+{
+    menu1 = (struct CharL *)malloc(sizeof(struct CharL) * 8);
+    for (int i = 0; i < 5; i++)
+    {
+        strcpy(menu1[0].arr1[i], des[i]);
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        strcpy(menu1[1].arr1[i], mon[i]);
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        strcpy(menu1[2].arr1[i], tue[i]);
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        strcpy(menu1[3].arr1[i], wed[i]);
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        strcpy(menu1[4].arr1[i], thu[i]);
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        strcpy(menu1[5].arr1[i], fri[i]);
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        strcpy(menu1[6].arr1[i], sat[i]);
+    }
+    for (int i = 0; i < 5; i++)
+    {
+        strcpy(menu1[7].arr1[i], sun[i]);
+    }
+    for (int k = 0; k < 5; k++)
+    {
+        printf("%s\t\t", menu1[0].arr1[k]);
+    }
+    printf("\n\n");
+    for (int i = 1; i < 8; i++)
+    {
+        for (int k = 0; k < 5; k++)
+        {
+            printf("%s\t\t", menu1[i].arr1[k]);
+        }
+        printf("\n");
+    }
+}
+
+int main()
+{
+    printf("      #     #  #####  ###   ###             #     #      #      #   #      #       ##    #####   #     #   #####   #   #   #####    \n");
+    printf("      ##   ##  #     #     #                ##   ##     # #     ##  #     # #     #  #   #       ##   ##   #       ##  #     #      \n");
+    printf("      # # # #  ###    ###   ###             # # # #    #####    # # #    #####    #      ###     # # # #   ###     # # #     #      \n");
+    printf("      #  #  #  #         #     #            #  #  #   #     #   #  ##   #     #   #  ##  #       #  #  #   #       #  ##     #      \n");
+    printf("      #     #  #####  ###   ###             #     #  #       #  #   #  #       #   ## #  #####   #     #   #####   #   #     #      \n");
+    printf("\n\n\t<< Welcome to the Mess Management System >>\n");
+
+    int choice_num, choice_num1, choice_num2, choice_num3, n;
+    char string[150];
+    char s[3][40];
+    FILE *suggestion = fopen(suggestionsFile, "a+");
+    fprintf(suggestion, "\nRoll_no-%s", RollNo);
+
+    char choice_ = 'Y';
+    while (choice_ == 'Y' || choice_ == 'y')
+    {
+        printf("\nSelect one of the options by entering one the numbers(Input an integer):\n");
+        printf("1.Current Mess Menu\n2.Suggestions for next Menu\n3.Complains\n4.Mess Rebate System\n5.Feedback\nEnter your choice : ");
+        scanf("%d", &choice_num);
+        if (choice_num == 1)
+        {
+            menu();
+        }
+        else if (choice_num == 2)
+        {
+
+            printf("Choose:-\n(The input should be an integer)\n1.Items to be removed\n2.Items to be introduced\nYour choice: ");
+            scanf("%d", &choice_num1);
+            if (choice_num1 == 1)
+            {
+                menu();
+            a:
+                printf("\n\nChoose the day(on which that item is served) and the item to be removed:-\n(The input should be an integer)\n"); // 1.Monday  2.Tuesday  3.Wednesday  4.Thursday  5.Friday  6.Saturday  7.Sunday\n
+                for (int i = 1; i < 8; i++)
+                {
+                    printf(" %d. %s\t", i, menu1[i].arr1[0]);
+                }
+                printf("\n");
+                scanf("%d", &choice_num2);
+                if (choice_num2 == 1 || choice_num2 == 2 || choice_num2 == 3 || choice_num2 == 4 || choice_num2 == 5 || choice_num2 == 6 || choice_num2 == 7)
+                {
+                }
+                else
+                {
+                    printf("Give a proper input !");
+                    goto a;
+                }
+
+                struct CharL ch;
+            b:
+                for (int i = 1; i < 5; i++)
+                {
+                    printf(" %d. %s\t", i, menu1[choice_num2].arr1[i]);
+                }
+                printf("\n");
+                scanf("%d", &choice_num3);
+                if(suggestion==NULL){printf("\nfile cant open");}/////////////
+                if (choice_num3 == 1 || choice_num3 == 2 || choice_num3 == 3 || choice_num3 == 4)
+                {
+                    fprintf(suggestion, "\tSuggestions of food items to be removed - %s\t%s", menu1[choice_num2].arr1[0], menu1[choice_num2].arr1[choice_num3]);
+                    // char string[100]="Suggestions of food items to be removed -";
+                    // fputs(string,suggestion);
+                    // fputs(menu1[choice_num2].arr1[0],suggestion);
+                    // fputs( menu1[choice_num2].arr1[choice_num3],suggestion);
+                    
+                    printf("Your suggestion has been recorded!\n");
+                }
+                else
+                {
+                    printf("Give a proper input !\n");
+                    goto b;
+                }
+                fclose(suggestion);
+            }
+            else if (choice_num1 == 2)
+            {
+            c:
+                printf("Enter the no. of suggestions you want to give (1<=n<=3) :- ");
+                scanf("%d", &n);
+                if (n == 1 || n == 2 || n == 3)
+                {
+                }
+                else
+                {
+                    printf("Give a proper input !\n");
+                    goto c;
+                }
+                printf("Enter the name of the food item/items that you want to be introduced:-\n(Enter the input in lower cases only)\n");
+                for (int i = 0; i < n; i++)
+                {
+                    while (getchar() != '\n');
+                        scanf("%[^\n]s", s[i]);
+                }
+                fprintf(suggestion, "\tSuggestions of food item/items be introduced-%s\t", s[0]);
+                for (int i = 1; i < n; i++)
+                {
+                    fprintf(suggestion, "\t%s", s[i]);
+                }
+
+                if(suggestion==NULL){printf("\nfile cant open");}/////////////
+
+                printf("Your suggestion has been taken successfully !\n");
+                fclose(suggestion);
+            }
+        }
+
+        else if (choice_num == 3)
+        {
+#define Max_Input_length 100
+#define complainsFileName "complaints.txt"
+
+    int choice1 = 0;
+    int firstTime = 1;
+    char s1[Max_Input_length];
+
+    do {
+        if (firstTime) {
+            printf("\nWelcome to our program!\n");
+            firstTime = 0;
+        }
+
+        printf("\nMenu of Complaint System:\n");
+        printf("1. Enter complaints\n");
+        printf("2. Access stored complaints\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice1);
+        getchar();
+        switch (choice1) {
+            case 1: {
+                int numComplaints;
+                printf("Enter the number of complaints you want to give (1 <= n <= 3): ");
+                scanf("%d", &numComplaints);
+                getchar();  
+                printf("Enter the complaint(s) regarding mess:\n");                
+                
+                FILE* complainsFile = fopen(complainsFileName, "a+");
+                
+
+                for (int i = 0; i < numComplaints; i++) {
+                    fgets(s1, Max_Input_length, stdin);                
+                    fprintf(complainsFile, "%s \t%s \n", RollNo,s1);
+                }
+
+
+                fclose(complainsFile);
+                printf("Thank you! Your complaint(s) have been submitted successfully!\n");
+                break;
+            }
+            case 2: {
+                char line[Max_Input_length];
+                FILE* complainsFile = fopen(complainsFileName, "r");
+                if (complainsFile != NULL) {
+                    printf("Stored complaints:\n");
+                    while (fgets(line, sizeof(line), complainsFile) != NULL) {
+                        printf("%s", line);
+                    }
+                    fclose(complainsFile);
+                } else {
+                    printf("No complaints found!\n");
+                }
+                break;
+            }
+            case 3: {
+                printf("The program ends\n");
+                break;
+            }
+            default: {
+                printf("Invalid choice! Please enter a valid option.\n");
+                break;
+            }
+        }
+            } while (choice1 != 3);
+        }
+        else if (choice_num == 5)
+        {
+#define feedbackFileName "feedback.txt"
+#define Max_Input_length 100
+
+int choice = 0;
+char s2[3][Max_Input_length];
+
+do
+{
+    printf("\nMenu of Feedback System:\n");
+    printf("1. Enter feedback\n");
+    printf("2. Access stored feedback\n");
+    printf("3. Exit\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+    getchar();
+
+    switch (choice)
+    {
+    case 1:
+    {
+        int numFeedback;
+        printf("Enter the number of feedback you want to give (1 <= n <= 3): ");
+        scanf("%d", &numFeedback);
+        getchar();
+        printf("Enter the feedback(s) regarding mess:\n");
+
+        for (int i = 0; i < numFeedback; i++)
+        {
+            scanf("%[^\n]", s2[i]);
+            getchar();
+        }
+
+        FILE *feedbackFile = fopen(feedbackFileName, "a+");
+        fprintf(feedbackFile, "\n %s\tFeedbacks- %s", RollNo, s2[0]);
+        for (int i = 1; i < numFeedback; i++)
+        {
+            fprintf(feedbackFile, "\t\t %s", s2[i]);
+        }
+        fclose(feedbackFile);
+        printf("Thank you! Your feedback(s) have been submitted successfully!\n");
+        break;
+    }
+    // other cases
+
+
+                case 2:
+                {
+                    char line[Max_Input_length];
+                    FILE *feedbackFile = fopen(feedbackFileName, "r");
+                    if (feedbackFile != NULL)
+                    {
+                        printf("Stored feedbacks:\n");
+                        while (fgets(line, sizeof(line), feedbackFile) != NULL)
+                        {
+                            printf("%s\n", line);
+                        }
+                        fclose(feedbackFile);
+                    }
+                    else
+                    {
+                        printf("No feedbacks found!\n");
+                    }
+                    break;
+                }
+                case 3:
+                {
+                    printf("Ending the program\n");
+                    break;
+                }
+                default:
+                {
+                    printf("Invalid choice! Please enter a valid option.\n");
+                    break;
+                }
+                }
+            } while (choice != 3);
+        }
+        else if (choice_num == 4)
+        {
+            int choice3;
+            int r, d1, m1, y1, d2, m2, y2;
+            int tot;
+            int M[12] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+            do
+            {
+                printf("\nMenu:\n");
+                printf("1. Enter the dates of rebate\n");
+                printf("2. Check rebate amount from file\n");
+                printf("3. Exit\n");
+                printf("Enter your choice: ");
+                scanf("%d", &choice3);
+
+                switch (choice3)
+                {
+                case 1:
+                {
+                    r = 0;
+                    reb:
+                    printf("(The maximum number of days that can be rebated is 30 )\nEnter the date(dd mm yy) from which rebate starts: ");
+                    scanf("%d %d %d", &d1, &m1, &y1);
+                    printf("Enter the date(dd mm yy) on which rebate ends: ");
+                    scanf("%d %d %d", &d2, &m2, &y2);
+                    if (m1 == m2)
+                    {
+                        r = d2 - d1 + 1;
+                    }
+                    else if (m2 = m1 + 1)
+                    {
+                        r = d2 + M[m1 - 1] - d1 + 1;
+                    }
+                    else
+                    {
+                        if (r > 30)
+                        {
+                            printf("Enter the dates considering the given limit of days !");
+                        }
+                        else if (r == 0)
+                        {
+                            printf("Enter the dates considering the given limit of days !");
+                        }
+                        goto reb;
+                    }
+                    
+
+                    tot = r * 127.17;
+
+                    FILE *Rfile = fopen("rebate.txt", "w");
+                    if (Rfile != NULL)
+                    {
+                        fprintf(Rfile, "\n%s\tRebate is considered from %d-%d-%d to %d-%d-%d\tRebate amount=%d", RollNo, d1, m1, y1, d2, m2, y2, tot);
+                        fclose(Rfile);
+                        printf("Thank you! Your amount %d will be rebated.\n", tot);
+                    }
+                    else
+                    {
+                        printf("Error opening the file for writing.\n");
+                    }
+                    break;
+                }
+                case 2:
+                {
+                    FILE *Rfile = fopen("rebate.txt", "r");
+                    if (Rfile != NULL)
+                    {
+                        fscanf(Rfile, "%d", &tot);
+                        fclose(Rfile);
+                        printf("Your rebate amount is: %d\n", tot);
+                    }
+                    else
+                    {
+                        printf("Error opening the file for reading.\n");
+                    }
+                    break;
+                }
+                case 3:
+                {
+                    printf("Exiting the program.\n");
+                    break;
+                }
+                default:
+                {
+                    printf("Invalid choice! Please enter a valid option.\n");
+                    break;
+                }
+                }
+            } while (choice3 != 3);
+        }
+
+        printf("\n\nDo you wish to continue(y/n) : ");
+        scanf(" %c", &choice_);
+        if (choice_ == 'Y' || choice_ == 'y' || choice_ == 'n' || choice_ == 'N')
+        {
+            if (choice_ == 'n' || choice_ == 'N')
+            {
+                printf("\nThank you for visiting the program and giving your precious time\nVisit again later   %c %c", smile, smile);
+                break;
+            }
+            continue;
+        }
+        else
+        {
+            while (1)
+            {
+                printf("Please enter a valid input !\n");
+                printf("\n\nDo you wish to continue(y/n) : ");
+                scanf(" %c", &choice_);
+                if (choice_ == 'Y' || choice_ == 'y' || choice_ == 'n' || choice_ == 'N')
+                {
+                    break;
+                }
+            }
+            if (choice_ == 'n' || choice_ == 'N')
+            {
+                printf("\nThank you for visiting the program and giving your precious time\nVisit again later   %c %c", smile, smile);
+                break;
+            }
+        }
+    }
+    return 0;
+}
